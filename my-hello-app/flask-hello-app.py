@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # Based on https://flask.palletsprojects.com/en/2.0.x/quickstart/
 
 from flask import Flask, escape
