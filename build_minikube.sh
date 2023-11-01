@@ -4,4 +4,4 @@ set -o errexit
 set -o pipefail
 shopt -s dotglob
 
-docker build -t my-hello-app .
+minikube image build -t 'python-flask-hello:latest' .

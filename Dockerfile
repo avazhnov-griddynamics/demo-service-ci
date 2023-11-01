@@ -12,6 +12,7 @@ RUN apt-get update \
 WORKDIR /app
 COPY ./my-hello-app /app
 
+# User exists in Devuan container: `nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin`, group is `nogroup`
 USER nobody
 EXPOSE 8080
 ENV FLASK_DEBUG=1
