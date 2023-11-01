@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: python-flask-hello-web
+  namespace: python-flask-hello
+spec:
+  defaultBackend:
+    service:
+      name: python-flask-svc
+      port:
+        name: flask-http
+        # number: 80
+  rules:
+    - host: python-flask-hello.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: python-flask-svc
+                port:
+                  name: flask-http
+                  # number: 8080
