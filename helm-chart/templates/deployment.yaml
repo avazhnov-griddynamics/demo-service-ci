@@ -26,4 +26,23 @@ spec:
       - name: python-flask-hello
         image: python-flask-hello:latest
         imagePullPolicy: Never  # workaround for Minikube, to not try to pull local images
-        resources: {}
+        ports:
+          - name: flask
+            containerPort: 8080
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 128Mi
+            cpu: 200m
+        readinessProbe:
+          httpGet:
+            port: flask
+            path: /
+        livenessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - "pidof -x python3"
