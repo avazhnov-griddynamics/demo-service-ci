@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: python-flask-hello
+  name: python-flask-hello
+  namespace: python-flask-hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-flask-hello
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-flask-hello
+    spec:
+      securityContext:
+        # User `nobody` exists in Devuan container, group is `nogroup`
+        runAsUser:  65534  # nobody
+        runAsGroup: 65534  # nogroup
+      containers:
+      - name: python-flask-hello
+        image: python-flask-hello:latest
+        imagePullPolicy: Never  # workaround for Minikube, to not try to pull local images
+        resources: {}

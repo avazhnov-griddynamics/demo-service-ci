@@ -7,3 +7,4 @@ Based on https://gitlab.com/vazhnov/gnss-web-control (Python, MIT license).
 * <del>logs</del>.
 * support tags for deployment (to be able deploy not only `:latest`).
 * healthchecks
+* use WSGI server (`gunicorn` / `uwsgi` + `nginx`) for Production
