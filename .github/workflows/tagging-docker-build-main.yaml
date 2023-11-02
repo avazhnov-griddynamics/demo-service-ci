@@ -17,7 +17,7 @@ jobs:
 
     # Copied from https://github.com/fwcd/kotlin-language-server/pull/433
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Get latest tag
       uses: actions-ecosystem/action-get-latest-tag@v1
@@ -45,7 +45,7 @@ jobs:
     - name: Login into GitHub container registry with a personal access token
       run: echo '${{ secrets.PERSONAL_ACCESS_TOKEN_CONTAINER_REGISTRY }}' | docker login ghcr.io -u 'avazhnov-griddynamics' --password-stdin
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Build the Docker image
       run: docker build --file Dockerfile_alpine --tag 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine' .

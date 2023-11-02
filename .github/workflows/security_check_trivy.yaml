@@ -15,7 +15,7 @@ jobs:
       security-events: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Build the Docker image
       run: docker build --file Dockerfile_alpine --tag "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ github.sha }}" .
