@@ -1,4 +1,10 @@
+Test task.
+
 Based on https://gitlab.com/vazhnov/gnss-web-control (Python, MIT license).
+
+## GitHub actions requirements
+
+A personal access token have to be created and stored into `secrets.PERSONAL_ACCESS_TOKEN_CONTAINER_REGISTRY` for GitHub actions workflow to be able to push container images into https://github.com/avazhnov-griddynamics/demo-service-ci/pkgs/container/python-flask-hello
 
 ## minikube
 
