@@ -12,8 +12,9 @@ bash ./build_minikube.sh
 ## How to
 
 Check the Ingress works:
+
 ```sh
-curl --resolve "python-flask-hello.example.com:80:$( minikube ip )" -i http://python-flask-hello.example.com/user/123
+curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 ```
 
 ## TODO
