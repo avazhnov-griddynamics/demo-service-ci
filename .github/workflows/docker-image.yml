@@ -15,6 +15,9 @@ jobs:
     timeout-minutes: 10
 
     steps:
+    - name: Login into GitHub container registry with a personal access token
+      run: echo '${{ secrets.PERSONAL_ACCESS_TOKEN_CONTAINER_REGISTRY }}' | docker login ghcr.io -u 'avazhnov-griddynamics' --password-stdin
+
     - uses: actions/checkout@v3
 
     - name: Build the Docker image
