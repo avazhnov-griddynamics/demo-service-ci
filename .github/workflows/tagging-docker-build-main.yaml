@@ -30,12 +30,6 @@ jobs:
         current_version: ${{ steps.get-latest-tag.outputs.tag }}
         level: patch
 
-    - name: Push new tag
-      if: ${{ steps.bump-semver.outputs.new_version != null }}
-      uses: actions-ecosystem/action-push-tag@v1
-      with:
-        tag: ${{ steps.bump-semver.outputs.new_version }}
-
   build:
     needs: tagging
     runs-on: ubuntu-latest
@@ -88,3 +82,9 @@ jobs:
         git config user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
         git commit -am "Automatically updated helm-chart/values.yaml image.tag to the latest version: ${{ needs.tagging.outputs.new_version }}"
         git push
+
+    - name: Push new tag
+      if: ${{ steps.bump-semver.outputs.new_version != null }}
+      uses: actions-ecosystem/action-push-tag@v1
+      with:
+        tag: ${{ steps.bump-semver.outputs.new_version }}
