@@ -10,7 +10,9 @@ on:
 jobs:
 
   tagging:
+    runs-on: ubuntu-latest
     timeout-minutes: 2
+
     # Copied from https://github.com/fwcd/kotlin-language-server/pull/433
     steps:
     - name: Get latest tag
