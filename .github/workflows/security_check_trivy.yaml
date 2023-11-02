@@ -1,3 +1,5 @@
+name: Trivy vulnerability scanner
+
 on:
   workflow_dispatch:
   pull_request:
