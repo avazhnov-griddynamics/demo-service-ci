@@ -15,6 +15,8 @@ jobs:
 
     # Copied from https://github.com/fwcd/kotlin-language-server/pull/433
     steps:
+    - uses: actions/checkout@v3
+
     - name: Get latest tag
       uses: actions-ecosystem/action-get-latest-tag@v1
       id: get-latest-tag
