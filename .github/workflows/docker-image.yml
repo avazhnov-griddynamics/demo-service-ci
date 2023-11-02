@@ -12,6 +12,8 @@ jobs:
   tagging:
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    outputs:
+      new_version: ${{ steps.bump-semver.outputs.new_version }}
 
     # Copied from https://github.com/fwcd/kotlin-language-server/pull/433
     steps:
@@ -35,6 +37,7 @@ jobs:
         tag: ${{ steps.bump-semver.outputs.new_version }}
 
   build:
+    needs: tagging
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -47,8 +50,16 @@ jobs:
     - name: Build the Docker image
       run: docker build --file Dockerfile_alpine --tag 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine' .
 
+    - name: Tag the Docker image
+      run: |
+        docker tag 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine' 'ghcr.io/avazhnov-griddynamics/python-flask-hello:latest'
+        docker tag 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine' "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ needs.tagging.outputs.new_version }}"
+
     - name: List Docker image(s)
       run: docker images --no-trunc
 
     - name: Push the Docker image
-      run: docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine'
+      run: |
+        docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine'
+        docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:latest'
+        docker push "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ needs.tagging.outputs.new_version }}"
