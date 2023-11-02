@@ -64,10 +64,25 @@ jobs:
         docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:latest'
         docker push "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ needs.tagging.outputs.new_version }}"
 
+  commit_push:
+    needs:
+    - tagging
+    - build
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: write
+    steps:
+
+    - uses: actions/checkout@v4
+
     - name: Update the image tag in Helm chart
       run: |
         set -x
         sed -i -- 's| tag: .*| tag: '${{ needs.tagging.outputs.new_version }}'|' helm-chart/values.yaml
 
     - name: Commit changes
-      run: git diff
+      run: |
+        git diff
+        git commit -am "Automatically updated helm-chart/values.yaml image.tag to the latest version: ${{ needs.tagging.outputs.new_version }}"
+        git push
