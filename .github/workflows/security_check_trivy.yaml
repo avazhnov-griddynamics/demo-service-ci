@@ -11,6 +11,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      security-events: write
 
     steps:
     - uses: actions/checkout@v3
@@ -25,8 +27,11 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ github.sha }}"
-        format: 'table'
-        exit-code: '1'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL,HIGH'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
