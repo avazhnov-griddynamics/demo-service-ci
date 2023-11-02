@@ -3,6 +3,7 @@ FROM python:3-alpine
 
 MAINTAINER Alexey Vazhnov "avazhnov@griddynamics.com"
 LABEL app=python-flask-hello
+LABEL org.opencontainers.image.description 'Alpine GNU/Linux + Python3 + Flask container with simple Hello world application'
 
 RUN apk add --no-cache py3-flask
 # COPY requirements.txt /usr/src/app/

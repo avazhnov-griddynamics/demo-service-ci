@@ -23,5 +23,8 @@ jobs:
     - name: Build the Docker image
       run: docker build --file Dockerfile_alpine --tag 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine' .
 
+    - name: List Docker image(s)
+      run: docker images --no-trunc
+
     - name: Push the Docker image
       run: docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine'
