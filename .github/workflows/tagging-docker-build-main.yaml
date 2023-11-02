@@ -85,6 +85,6 @@ jobs:
 
     - name: Push new tag
       if: ${{ needs.tagging.outputs.new_version != null }}
-      uses: actions-ecosystem/action-push-tag@v1
-      with:
-        tag: ${{ needs.tagging.outputs.new_version }}
+      run: |
+        git tag -a "${{ needs.tagging.outputs.new_version }}"
+        git push origin "${{ needs.tagging.outputs.new_version }}"
