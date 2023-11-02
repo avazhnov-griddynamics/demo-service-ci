@@ -1,4 +1,4 @@
-# The resulting size is about 236MB. The original image, "devuan_5_daedalus_python", is 156MB.
+# The resulting size is about 236 MB. The original image, "devuan_5_daedalus_python", is 156 MB.
 FROM registry.gitlab.com/vazhnov/devuan-docker-images/devuan_5_daedalus_python:latest
 
 MAINTAINER Alexey Vazhnov "avazhnov@griddynamics.com"

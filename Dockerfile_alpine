@@ -1,0 +1,21 @@
+# The resulting size is about 96 MB. The original image, `python:3-alpine` is 52 MB
+FROM python:3-alpine
+
+MAINTAINER Alexey Vazhnov "avazhnov@griddynamics.com"
+LABEL app=python-flask-hello
+
+RUN apk add --no-cache py3-flask
+# COPY requirements.txt /usr/src/app/
+# RUN pip install --no-cache-dir -r requirements.txt
+
+WORKDIR /app
+COPY ./my-hello-app /app
+
+# User exists in Alpine container: `uid=65534(nobody) gid=65534(nobody) groups=65534(nobody)`
+USER nobody
+EXPOSE 8080
+ENV FLASK_DEBUG=1
+ENV FLASK_APP=flask-hello-app.py
+
+# CMD ["/bin/bash", "./run_server.sh"]
+CMD ["flask", "run", "-p", "8080", "-h", "::"]
