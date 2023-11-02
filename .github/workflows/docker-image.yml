@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: docker build --file Dockerfile_alpine --tag 'python-flask-hello:alpine' .
+
+    - name: Tag the Docker image
+      run: docker tag 'python-flask-hello:alpine' 'python-flask-hello:latest'
