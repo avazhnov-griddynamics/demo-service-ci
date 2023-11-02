@@ -1,7 +1,7 @@
 web:
   replicas: 2
   image: python-flask-hello
-  tag: latest
+  tag: v0.1.5
   args:
     - '--bind'
     - '0.0.0.0'
