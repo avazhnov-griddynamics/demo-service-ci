@@ -63,3 +63,11 @@ jobs:
         docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:alpine'
         docker push 'ghcr.io/avazhnov-griddynamics/python-flask-hello:latest'
         docker push "ghcr.io/avazhnov-griddynamics/python-flask-hello:${{ needs.tagging.outputs.new_version }}"
+
+    - name: Update the image tag in Helm chart
+      run: |
+        set -x
+        sed -i -- 's| tag: .*| tag: '${{ needs.tagging.outputs.new_version }}'|' helm-chart/values.yaml
+
+    - name: Commit changes
+      run: git diff

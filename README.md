@@ -32,3 +32,4 @@ curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 * [ ] Support tags for deployment (to be able deploy not only `:latest`).
 * [ ] Use WSGI server (`gunicorn` / `uwsgi` + `nginx`) for Production.
 * [ ] Full templating of Helm chart.
+* [ ] Auto cleanup old images from GitHub container registry.
