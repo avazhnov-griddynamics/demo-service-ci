@@ -1,0 +1,15 @@
+web:
+  replicas: 2
+  image: python-flask-hello
+  tag: latest
+  args:
+    - '--bind'
+    - '0.0.0.0'
+    - 'app:app'
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 100m
+    limits:
+      memory: 128Mi
+      cpu: 200m

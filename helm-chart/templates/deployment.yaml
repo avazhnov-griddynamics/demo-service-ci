@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: python-flask-hello
+  name: python-flask-hello
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.web.replicas }}
+  selector:
+    matchLabels:
+      app: python-flask-hello
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-flask-hello
+    spec:
+      securityContext:
+        # User `nobody` exists in Devuan container, group is `nogroup`
+        runAsUser:  65534  # nobody
+        runAsGroup: 65534  # nogroup
+      containers:
+      - name: python-flask-hello
+        image: {{ .Values.web.image }}:{{ .Values.web.tag }}
+        imagePullPolicy: Never  # workaround for Minikube, to not try to pull local images
+        # `command` and `args` are the same as in Dockerfile, just for example
+        command:
+          - "flask"
+        args: [ "run", "-p", "8080", "-h", "::" ]
+        ports:
+          - name: flask
+            containerPort: 8080
+        resources: {{ toYaml .Values.web.resources | nindent 12 }}
+        readinessProbe:
+          httpGet:
+            port: flask
+            path: /
+        livenessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - "pidof -x python3"
