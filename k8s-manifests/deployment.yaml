@@ -26,6 +26,10 @@ spec:
       - name: python-flask-hello
         image: python-flask-hello:latest
         imagePullPolicy: Never  # workaround for Minikube, to not try to pull local images
+        # `command` and `args` are the same as in Dockerfile, just for example
+        command:
+          - "flask"
+        args: [ "run", "-p", "8080", "-h", "::" ]
         ports:
           - name: flask
             containerPort: 8080
