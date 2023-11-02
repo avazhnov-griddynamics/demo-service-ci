@@ -43,4 +43,4 @@ spec:
             command:
               - /bin/sh
               - -c
-              - "pidof -x python3"
+              - "pidof python3"  # Argument `-x` is not supported with busybox version in Alpine linux.
