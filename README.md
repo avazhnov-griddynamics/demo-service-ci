@@ -23,6 +23,10 @@ Check the Ingress works:
 curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 ```
 
+## Argo CD
+
+TBD.
+
 ## TODO
 
 * [x] <del>pass kill signall from outside (for example, from `docker stop my-hello-app01`) to the app.</del>
