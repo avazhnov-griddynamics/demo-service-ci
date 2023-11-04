@@ -15,6 +15,10 @@ minikube addons enable ingress
 bash ./build_minikube.sh
 ```
 
+## Argo CD
+
+TBD.
+
 ## How to
 
 Check the Ingress works:
@@ -23,9 +27,9 @@ Check the Ingress works:
 curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 ```
 
-## Argo CD
+## Known issues
 
-TBD.
+The Helm Chart can't be installed multiple times (for example, into different namespaces) because of hardcoded `host` in Ingress rules.
 
 ## TODO
 
@@ -35,5 +39,5 @@ TBD.
 * [x] <del>Add healthchecks</del>.
 * [ ] Support tags for deployment (to be able deploy not only `:latest`).
 * [ ] Use WSGI server (`gunicorn` / `uwsgi` + `nginx`) for Production.
-* [ ] Full templating of Helm chart.
+* [ ] Full templating of Helm chart, including `host` in Ingress.
 * [ ] Auto cleanup old images from GitHub container registry.
