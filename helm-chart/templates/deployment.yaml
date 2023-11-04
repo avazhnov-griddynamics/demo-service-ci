@@ -25,10 +25,10 @@ spec:
       containers:
       - name: python-flask-hello
         image: {{ .Values.web.image }}:{{ .Values.web.tag }}
-        imagePullPolicy: Never  # workaround for Minikube, to not try to pull local images
+        # Workaround for Minikube, to not try to pull local images: use `imagePullPolicy: Never`
+        imagePullPolicy: {{ .Values.web.imagePullPolicy }}
         # `command` and `args` are the same as in the Dockerfile. Here they are just as example.
-        command:
-          - "flask"
+        command: [ "flask" ]
         args: [ "run", "-p", "8080", "-h", "::" ]
         ports:
           - name: flask
