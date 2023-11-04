@@ -1,11 +1,7 @@
 web:
   replicas: 2
-  image: python-flask-hello
+  image: 'ghcr.io/avazhnov-griddynamics/python-flask-hello'
   tag: v0.2.6
-  args:
-    - '--bind'
-    - '0.0.0.0'
-    - 'app:app'
   resources:
     requests:
       memory: 64Mi
