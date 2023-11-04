@@ -13,3 +13,5 @@ web:
     limits:
       memory: 128Mi
       cpu: 200m
+ingress:
+  enabled: true
