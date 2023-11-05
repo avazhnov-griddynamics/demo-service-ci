@@ -3,7 +3,7 @@ web:
   image: 'ghcr.io/avazhnov-griddynamics/python-flask-hello'
   # Workaround for Minikube, to not try to pull local images: use `imagePullPolicy: Never`
   imagePullPolicy: IfNotPresent
-  tag: v0.9.2
+  tag: v0.9.3
   resources:
     requests:
       memory: 64Mi
