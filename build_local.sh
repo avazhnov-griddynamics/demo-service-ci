@@ -4,6 +4,6 @@ set -o errexit
 set -o pipefail
 shopt -s dotglob
 
-docker build --file Dockerfile_alpine --tag 'python-flask-hello:alpine' .
-docker tag 'python-flask-hello:alpine' 'python-flask-hello:latest'
+docker build --file Dockerfile_devuan --tag 'python-flask-hello:devuan' .
+docker tag 'python-flask-hello:devuan' 'python-flask-hello:latest'
 # minikube image load 'python-flask-hello:latest'
