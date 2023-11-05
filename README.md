@@ -72,6 +72,6 @@ curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 * [x] <del>Add healthchecks</del>.
 * [x] <del>Support tags for deployment (to be able deploy not only `:latest`)</del>.
 * [ ] Full templating of Helm chart, <del>including `host` in Ingress</del>.
-* [ ] Run security check on every _commit_ in Pull request.
+* [x] <del>Run security check on every _commit_ in Pull request</del>.
 * [ ] Use WSGI server (`gunicorn` / `uwsgi` + `nginx`) for Production.
 * [ ] Auto cleanup old images from GitHub container registry.
