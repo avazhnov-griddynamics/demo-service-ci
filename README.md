@@ -17,7 +17,23 @@ bash ./build_minikube.sh
 
 ## Argo CD
 
-TBD.
+Install Argo CD.
+
+Install the Python Flask app
+
+```sh
+argocd app create 'python-flask-hello-argo-app' \
+  --repo https://github.com/avazhnov-griddynamics/demo-service-ci.git \
+  --path helm-chart \
+  --helm-set replicaCount=2 \
+  --dest-namespace python-flask-hello-argo \
+  --dest-name minikube
+argocd app sync 'python-flask-hello-argo-app'
+```
+
+```sh
+kubectl apply -n argocd -f Argo_CD/ApplicationSet_FairwindsOps.yaml
+```
 
 ## How to
 

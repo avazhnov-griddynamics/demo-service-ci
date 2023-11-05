@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: 'fairwinds-tools'
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - chart_name: 'polaris'
+        chart_repo: 'https://charts.fairwinds.com/stable'
+        chart_version: '5.16.0'
+      - chart_name: 'goldilocks'
+        chart_repo: 'https://charts.fairwinds.com/stable'
+        chart_version: '8.0.0'
+  template:
+    metadata:
+      name: '{{ chart_name }}-tool'
+    spec:
+      project: default
+      source:
+        repoURL: '{{ chart_repo }}'
+        chart: '{{ chart_name }}'
+        targetRevision: '{{ chart_version }}'
+      destination:
+        server: 'https://192.168.49.2:8443'
+        namespace: '{{ chart_name }}-ns'
