@@ -19,7 +19,7 @@ spec:
         app: python-flask-hello
     spec:
       securityContext:
-        # User `nobody` exists in Devuan container, group is `nogroup`
+        # User `nobody` exists in both Alpine and Devuan container, uid=65534 gid=65534
         runAsUser:  65534  # nobody
         runAsGroup: 65534  # nogroup
       containers:

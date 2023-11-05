@@ -29,7 +29,7 @@ bash ./build_minikube.sh
 
 [Install Argo CD](https://argo-cd.readthedocs.io/en/stable/getting_started/).
 
-Install the Python Flask app:
+Add the Python Flask app into the Argo CD:
 
 ```sh
 argocd app create 'python-flask-hello-argo-app' \
@@ -41,7 +41,11 @@ argocd app create 'python-flask-hello-argo-app' \
 argocd app sync 'python-flask-hello-argo-app'
 ```
 
+Install [Polaris](https://github.com/FairwindsOps/polaris/blob/master/docs/dashboard.md) and [Goldilocks](https://github.com/FairwindsOps/goldilocks/blob/master/docs/installation.md) with ApplicationSet:
+
 ```sh
+kubectl create namespace polaris-ns
+kubectl create namespace goldilocks-ns
 kubectl apply -n argocd -f Argo_CD/ApplicationSet_FairwindsOps.yaml
 ```
 
@@ -55,16 +59,14 @@ curl -H "Host: python-flask-hello.example.com" "http://$(minikube ip)/user/123"
 
 ## Known issues
 
-* File `helm-chart/values.yaml` is changing automatically by [GitHub actions](https://github.com/avazhnov-griddynamics/demo-service-ci/actions/workflows/tagging-docker-build-main.yaml) on every commit into the main branch. Changes have to be pulled into developer's local repository.
-* The Helm Chart can't be installed multiple times (for example, into different namespaces) because of hardcoded `host` in Ingress rules.
+* File `helm-chart/values.yaml` is changing automatically by [GitHub actions](https://github.com/avazhnov-griddynamics/demo-service-ci/actions/workflows/tagging-docker-build-main.yaml) on every commit into the main branch. Changes have to be pulled manually into developer's local repository.
 
 ## TODO
 
-* [x] <del>pass kill signall from outside (for example, from `docker stop my-hello-app01`) to the app.</del>
-  Works fine with `CMD = ["flask", "run", "-p", "8080", "-h", "::"]`, but not with `CMD ["/bin/bash", "./run_server.sh"]`.
+* [x] <del>pass kill signall from outside (for example, from `docker stop my-hello-app01`) to the app</del>.
 * [x] <del>Check logs are writing</del>.
 * [x] <del>Add healthchecks</del>.
-* [ ] Support tags for deployment (to be able deploy not only `:latest`).
+* [x] <del>Support tags for deployment (to be able deploy not only `:latest`)</del>.
+* [ ] Full templating of Helm chart, <del>including `host` in Ingress</del>.
 * [ ] Use WSGI server (`gunicorn` / `uwsgi` + `nginx`) for Production.
-* [ ] Full templating of Helm chart, including `host` in Ingress.
 * [ ] Auto cleanup old images from GitHub container registry.

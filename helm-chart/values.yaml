@@ -13,3 +13,4 @@ web:
       cpu: 200m
 ingress:
   enabled: true
+  host: 'python-flask-hello.example.com'
