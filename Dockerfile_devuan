@@ -2,7 +2,6 @@
 FROM registry.gitlab.com/vazhnov/devuan-docker-images/devuan_5_daedalus_python:latest
 
 MAINTAINER Alexey Vazhnov "avazhnov@griddynamics.com"
-LABEL app=python-flask-hello
 LABEL org.opencontainers.image.description 'Devuan GNU/Linux + Python3 + Flask container with simple Hello world application'
 LABEL org.opencontainers.image.source 'https://github.com/avazhnov-griddynamics/demo-service-ci/blob/main/Dockerfile_devuan'
 
